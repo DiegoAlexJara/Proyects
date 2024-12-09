@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+require __DIR__ . '/postify.php';
+require __DIR__ . '/tiendaComics.php';
+require __DIR__ . '/finanzas.php';
