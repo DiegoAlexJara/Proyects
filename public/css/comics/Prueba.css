@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    
+    padding: 0 0 20px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Separa el logo, menú y la sección derecha */
+    align-items: center;
+}
+
+.logo a {
+    color: #000000;
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 200px;
+    justify-content: center; /* Centra los enlaces */
+    flex-grow: 1; /* Hace que ocupen el espacio disponible */
+}
+
+.nav-links li a {
+    color: #000000;
+    text-decoration: none;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    opacity: .6 ;
+    border-radius: 5px;
+}
+
+/* Contenedor derecho alineado a la derecha */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cart-icon {
+    background-color: #27ae60;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+.cart-icon:hover {
+    background-color: #2ecc71;
+    opacity: .8;
+}
+
+.admin-btn {
+    background-color: #f39c12;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.admin-btn:hover {
+    background-color: #e67e22;
+    opacity: .8;
+}
+
+.login-btn, .profile-btn {
+    background-color: #3498db;
+    padding: 10px 15px;
+    
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover, .profile-btn:hover {
+    background-color: #2980b9;
+    opacity: .8;
+}

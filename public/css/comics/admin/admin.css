@@ -1,0 +1,86 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    height: 100vh; /* Altura completa de la ventana del navegador */
+    width: 300px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    flex: 1; /* Toma el espacio disponible */
+}
+
+.sidebar ul li {
+    margin: 15px 0;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757;
+}
+
+.sidebar-footer {
+    margin-top: auto; /* Empuja los botones hacia el fondo */
+}
+
+.back-button,
+.logout-button {
+    background-color: #d9534f; /* Color rojo para los botones */
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Ocupa todo el ancho de la barra */
+    margin: 5px 0; /* Espacio entre los botones */
+}
+
+.back-button {
+    background-color: #5bc0de; /* Color azul para el botón de regresar */
+}
+
+.back-button:hover {
+    background-color: #31b0d5; /* Color más oscuro al pasar el ratón */
+}
+
+.logout-button:hover {
+    background-color: #c9302c; /* Color más oscuro al pasar el ratón */
+}
+
+.content {
+    margin-left: 300px; /* Espacio para la barra lateral */
+    padding: 20px;
+    text-align: center;
+}
+.header-link {
+    color: #fff;
+    text-decoration: none; /* Quitar el subrayado */
+}
+
+.header-link:hover {
+    text-decoration: underline; /* Opcional: subrayar al pasar el ratón */
+}

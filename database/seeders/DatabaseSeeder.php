@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Seeders\Comics\CategorySeeder;
+use Database\Seeders\Comics\MarcaSeeder;
+use Database\Seeders\Comics\Products;
+use Database\Seeders\Comics\ProductsSeeder;
+use Database\Seeders\Comics\SubCategorySeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -18,6 +23,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             ProyectsSeeder::class,
+            CategorySeeder::class,
+            MarcaSeeder::class,
+            SubCategorySeeder::class,
+            ProductsSeeder::class,
         ]);
         $user = User::create([
             'name' => 'visitante',

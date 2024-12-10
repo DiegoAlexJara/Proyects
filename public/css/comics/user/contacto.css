@@ -1,0 +1,155 @@
+body {
+    font-family: 'Arial', sans-serif;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to top right, #ff0404, #ff8c00);
+    margin: 0;
+    /* Eliminar márgenes predeterminados */
+    padding: 20px;
+    /* Espacio interno */
+    color: #333;
+    /* Color de texto por defecto */
+
+}
+
+.contact-section {
+    padding: 20px;
+    border-radius: 10px;
+    /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* Sombra suave */
+    margin: 20px auto;
+    /* Centrar el contenedor */
+    width: 80%;
+    /* Ancho responsivo */
+}
+
+.session1 {
+    text-align: center;
+}
+
+.session1 p {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: lowercase;
+}
+
+.session1 h2 {
+    text-align: center;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: 400;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
+}
+
+.content p {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: lowercase;
+}
+
+.content h3 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: uppercase;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+.contact-section form {
+    display: flex;
+    flex-direction: column;
+    /* Colocar elementos en columna */
+    gap: 10px;
+    /* Espacio entre campos */
+    margin-bottom: 20px;
+}
+
+.contact-section input[type="text"],
+.contact-section input[type="email"],
+.contact-section textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    /* Borde suave */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    font-size: 1em;
+    /* Tamaño de fuente */
+}
+
+.contact-section button {
+    padding: 10px;
+    background-color: #27ae60;
+    /* Color del botón */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    /* Bordes redondeados */
+    cursor: pointer;
+    /* Cambiar cursor al pasar por encima */
+    font-size: 1em;
+    transition: background-color 0.3s;
+    /* Transición suave */
+}
+
+.contact-section button:hover {
+    background-color: #2ecc71;
+    /* Color del botón al hacer hover */
+}
+
+.contact-section .map {
+    margin-top: 20px;
+    /* Espacio superior para el mapa */
+    display: flex;
+    justify-content: center;
+    /* Centrar el mapa */
+}
+
+.contact-section a {
+    color: #27ae60;
+    /* Color de enlaces */
+    text-decoration: none;
+    /* Sin subrayado */
+}
+
+.contact-section a:hover {
+    text-decoration: underline;
+    /* Subrayar al pasar por encima */
+}
+.redes{
+    text-align: center;
+}
+.redes img{
+    width: 200px;
+    height: auto;
+    margin: 0 30px;
+}
+.redes img:hover{
+    opacity: .5;
+}

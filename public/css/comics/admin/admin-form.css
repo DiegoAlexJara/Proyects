@@ -1,0 +1,64 @@
+.container-form {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+    width: 1000px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+.container-form:hover{
+    transform: scale(1.2);
+}
+
+form p {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+    display: inline-block;
+}
+
+/* Estilo para el título "ROLES ASIGNADOS" */
+form p:first-of-type {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px; /* Separación hacia el resto del formulario */
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    width: 48%; /* Dos elementos por fila */
+    margin-bottom: 10px;
+}
+
+form input[type="checkbox"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+form input[type="submit"] {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #45a049;
+}

@@ -1,0 +1,140 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000000;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to top right, #ff0404, #ff8c00);
+    margin: 0;
+    /* Eliminar márgenes predeterminados */
+    padding: 20px;
+    /* Espacio interno */
+    color: #333;
+    /* Color de texto por defecto */
+    background-size: cover;
+    background-repeat: no-repeat;
+
+
+}
+
+.container-category {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columnas iguales */
+    gap: 10px;
+    /* Espacio entre los cuadros */
+    width: 99%;
+    /* Contenedor ocupa el 100% del ancho */
+    height: auto;
+
+}
+
+.box {
+    background-color: #f0f0f0;
+    border: 1px solid #333;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    width: 100%;
+
+    /* Cada cuadro ocupa el 100% del ancho de su celda */
+    box-sizing: border-box;
+    /* Incluye padding y border en el ancho total */
+    position: relative;
+    display: inline-block;
+    /* Para que el contenedor ajuste su tamaño al contenido */
+    cursor: pointer;
+    /* Cambia el cursor para indicar que es interactivo */
+    transition: transform .02s ease-in-out;
+    border-radius: 10px;
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.box:hover {
+    transform: scale(1.02);
+
+
+}
+
+.hover-container {
+    position: relative;
+    display: inline-block;
+    /* Ajusta el tamaño al contenido */
+    cursor: pointer;
+    /* Cambia el cursor para indicar que es interactivo */
+    padding: 10px;
+    /* Espaciado interno opcional */
+    margin: 10px;
+    margin-bottom: 31px;
+    /* Espaciado externo opcional */
+    color: #000000;
+    /* Color del texto, puedes ajustarlo */
+    text-align: center;
+    /* Centra el texto */
+    height: 350px;
+}
+
+.hover-text {
+    
+    position: absolute;
+    /* Posiciona el texto sobre la caja */
+    background-color: rgba(255, 255, 255, 0.8);
+    
+    /* Color de fondo semitransparente */
+    color: #fff;
+    /* Color del texto */
+    border-radius: 5px;
+    /* Esquinas redondeadas */
+    padding: 5px;
+    /* Espaciado interno */
+    z-index: 10;
+    /* Asegura que esté encima de otros elementos */
+    top: 50%;
+    /* Centra verticalmente */
+    left: 50%;
+    /* Centra horizontalmente */
+    transform: translate(-50%, -50%);
+    /* Ajuste del centro */
+    width: 70%;
+    /* white-space: nowrap; */
+    /* Evita que el texto se divida en varias líneas */
+
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: lowercase;
+    opacity: .8;
+
+}
+
+.hover-text p {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #ffffff;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: uppercase;
+}
+
+
+h3 {
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-size: 25px;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    color: #000000;
+    font-weight: normal;
+    text-decoration: none;
+    font-style: normal; 
+    font-variant: normal;
+    text-transform: uppercase;
+}
