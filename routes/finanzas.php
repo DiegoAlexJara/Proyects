@@ -29,6 +29,7 @@ Route::prefix('finanza')->group(function () {
     Route::get('Inicio', [MainFinanzaController::class, 'index'])
         ->name('finanza_Inicio')
         ->middleware(CheckFinanzasAccess::class);
+        
     Route::get('Report', [MainFinanzaController::class, 'report'])
         ->name('finanza_Report')
         ->middleware(CheckFinanzasAccess::class);
