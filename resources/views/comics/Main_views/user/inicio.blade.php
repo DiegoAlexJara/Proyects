@@ -6,5 +6,5 @@
     <link rel="stylesheet" href="{{ asset('css/comics/user/shop-producto.css') }}">
 @endsection
 @section('content')
-    @livewire('comics.products')
+    @livewire('comics.user.products')
 @endsection

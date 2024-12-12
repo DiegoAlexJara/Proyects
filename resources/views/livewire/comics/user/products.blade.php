@@ -18,7 +18,7 @@
                         <h2 class="product-title">{{ $item->Name }}</h2>
                         <p class="product-price"><strong>PRECIO</strong> ${{ $item->price }}</p>
                         <p class="product-description">{{ $item->description }}</p>
-                        {{-- @livewire('AñadirCarrito', ['producId' => $item->id], key($item->id)) --}}
+                        @livewire('comics.user.add-cart', ['producId' => $item->id], key($item->id))
                     </div>
                 </div>
             </div>
@@ -28,8 +28,5 @@
     <div class="d-flex justify-content-center">
         {{ $products->links('pagination::bootstrap-5') }}
     </div>
-
-      <!-- Incluye Bootstrap JS -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </div>

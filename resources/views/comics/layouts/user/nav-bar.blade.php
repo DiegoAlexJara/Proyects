@@ -14,15 +14,15 @@
                         CATEGORIAS
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="">Marcas</a></li>
+                        <li><a class="dropdown-item" href="{{ route('comics_userMarcas') }}">Marcas</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="">Categorias</a></li>
+                        <li><a class="dropdown-item" href="{{ route('comics_userCategorys') }}">Categorias</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="">Sub Categorias</a></li>
+                        <li><a class="dropdown-item" href="{{ route('comics_userSubCategorys') }}">Sub Categorias</a></li>
 
 
                     </ul>
