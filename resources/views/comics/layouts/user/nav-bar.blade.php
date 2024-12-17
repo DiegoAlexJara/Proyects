@@ -35,7 +35,7 @@
             <div class="right-section">
 
 
-                <a href="" class="admin-btn">Panel Admin</a>
+                <a href="{{ route('comics_adminInicio') }}" class="admin-btn">Panel Admin</a>
 
 
                 <a href="" class="d-flex cart-icon">

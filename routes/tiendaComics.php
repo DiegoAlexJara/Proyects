@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Comics\Admin\AdminMainComicsController;
 use App\Http\Controllers\Comics\AuthComicsController;
 use App\Http\Controllers\Comics\MainComicsController;
 use App\Http\Controllers\Comics\User\UserMainComicsController;
@@ -29,6 +30,7 @@ Route::prefix('comics')->group(function () {
             Route::get('/{categoria}', [UserMainComicsController::class, 'CategoriasProducts'])
                 ->name('comics_userCategorysProducts');
         });
+        
         Route::prefix('Marcas')->group(function () {
 
             Route::get('/', [UserMainComicsController::class, 'Marcas'])
@@ -37,6 +39,7 @@ Route::prefix('comics')->group(function () {
             Route::get('/{categoria}', [UserMainComicsController::class, 'MarcasProducts'])
                 ->name('comics_userMarcasProducts');
         });
+
         Route::prefix('sub_category')->group(function () {
 
             Route::get('/', [UserMainComicsController::class, 'SubCategorias'])
@@ -47,5 +50,11 @@ Route::prefix('comics')->group(function () {
         });
     });
 
-    Route::prefix('admin')->group(function () {});
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [AdminMainComicsController::class, 'inicio'])
+            ->name('comics_adminInicio');
+
+        Route::get('/products', [AdminMainComicsController::class, 'products'])
+            ->name('comics_adminProducts');
+    });
 });
