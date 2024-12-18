@@ -56,5 +56,8 @@ Route::prefix('comics')->group(function () {
 
         Route::get('/products', [AdminMainComicsController::class, 'products'])
             ->name('comics_adminProducts');
+        
+        Route::get('/marcas', [AdminMainComicsController::class, 'marcas'])
+            ->name('comics_adminMarcas');
     });
 });

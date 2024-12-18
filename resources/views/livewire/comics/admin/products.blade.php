@@ -40,16 +40,27 @@
                     <th class="texto">{{ $registro->description }}</th>
                     <th>
 
-                        @livewire('comics.admin.products.EditImage', ['IdUser' => $registro->id, 'model' => \App\Models\Comics\Product::class], key($registro->id))
+                        <div style="text-align: center">
+                            <img src="{{ asset($registro->path) }}" alt="Image" style="width: 100px; height: auto;">
 
-                        {{-- @livewire('comics.admin.products.EditImage', ['IdUser' => $registro->id], key($registro->id)) --}}
-
+                            <p><button class="btn btn-success mt-3"
+                                    wire:click="toggleSquare({{ $registro->id }})">MODIFICAR</button></p>
+                        </div>
                     </th>
                     <th class="texto">${{ $registro->price }}</th>
                     <th class="texto">
 
-                        @livewire('comics.admin.products.product-unit', ['productId' => $registro->id], key('product-unit-' . $registro->id)) 
-                    
+                        <div style="text-align: center">
+                            <p>
+                                <strong>
+                                    {{ $registro->stock }}
+                                </strong>
+                            </p>
+                            <button class="btn btn-danger" wire:click='desincrementrar({{ $registro->id }})'>-</button>
+                            <button class="btn btn-success" wire:click='incrementar({{ $registro->id }})'>+</button>
+                        </div>
+
+
                     </th>
                     <th class="texto">{{ $registro->Marca->name }}</th>
                     <th class="texto">{{ $registro->Category->name }}</th>
@@ -63,7 +74,8 @@
 
                             <li>
                                 <div class="d-grid gap-2" style="margin-bottom: 5px">
-                                    <button wire:click='edit({{$registro->id}})' class="btn btn-warning">MODIFICAR</button>
+                                    <button wire:click='edit({{ $registro->id }})'
+                                        class="btn btn-warning">MODIFICAR</button>
                                 </div>
                             </li>
                             <li>
@@ -97,7 +109,7 @@
                     <button class="btn btn-danger" wire:click='NuevoProducto'>X</button>
                 </div>
             </div>
-            <form wire:submit='save'>
+            <form wire:submit.prevent='save'>
 
                 <div style="text-align: center; justify-items: center">
                     <div class="mb-3" style="width: 50%; text-align: center">
@@ -133,8 +145,8 @@
                     </div>
                     <div class="mb-3" style="width: 49%; ">
                         <label for="" class="form-label">UNIDADES</label>
-                        <input type="number"class="form-control" name="stock" wire:model.live='stock' id="stock"
-                            max='10000000' min='1'>
+                        <input type="number"class="form-control" name="stock" wire:model.live='stock'
+                            id="stock" max='10000000' min='1'>
                         @error('stock')
                             <p>{{ $message }}</p>
                         @enderror
@@ -203,7 +215,7 @@
                     <button class="btn btn-danger" wire:click='EditarProducto()'>X</button>
                 </div>
             </div>
-            <form wire:submit='editar'>
+            <form wire:submit.prevent='editar'>
 
                 <div style="text-align: center; justify-items: center">
                     <div class="mb-3" style="width: 50%; text-align: center">
@@ -294,6 +306,25 @@
                 <div class="d-grid gap-2 mb-3">
                     <button class="btn btn-primary" type="submit">EDITAR PRODUCTO</button>
                 </div>
+
+        </div>
+    @endif
+
+    @if ($showSquare)
+        <div class="overlay-background"></div>
+        <div class="overlay-square">
+            <div style="display: flex">
+                <div style="width: 90%">
+                    <h2>Editar Imagen</h2>
+                </div>
+                <div style="width: 10%; text-align: right">
+                    <button class="btn btn-danger" wire:click='toggleSquare(0)'>X</button>
+                </div>
+            </div>
+
+            @livewire('comics.admin.products.edit-image', ['IdUser' => $idImage, 'model' => \App\Models\Comics\Product::class], key('Producto - Image -' . $idImage))
+
+
 
         </div>
     @endif

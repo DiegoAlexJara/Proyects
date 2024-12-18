@@ -11,16 +11,10 @@ class EditImage extends Component
     use WithFileUploads;
 
     public $oldImage;
-    public $showSquare = false;
     public $image;
     public $IdUser;
     public $model;
 
-    public function toggleSquare()
-    {
-        $this->showSquare = !$this->showSquare;
-        $this->image = null;
-    }
     public function mount()
     {
         
@@ -63,6 +57,7 @@ class EditImage extends Component
                     $this->oldImage = 'img/comic/products'.$newImageName;
 
                     session()->flash('success', 'Imagen subida y actualizada correctamente.');
+                    $this->dispatch("editar-imagen"); 
                     $this->render();
                 } else {
                     session()->flash('error', 'No se pudo mover la nueva imagen.');
@@ -77,7 +72,6 @@ class EditImage extends Component
             $this->render();
         }
         $this->image = null;
-        $this->showSquare = false; 
 
     }
     public function deleteOldImage()

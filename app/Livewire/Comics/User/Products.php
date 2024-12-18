@@ -15,6 +15,14 @@ class Products extends Component
     public $model;
     public $search;
     public $BDDType;
+    protected $queryString = ['search'];
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+
 
     public function render()
     {

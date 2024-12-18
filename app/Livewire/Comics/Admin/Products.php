@@ -6,6 +6,7 @@ use App\Models\Comics\Category;
 use App\Models\Comics\Marca;
 use App\Models\Comics\Product;
 use App\Models\Comics\SubCategory;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,10 +15,12 @@ class Products extends Component
     use WithPagination;
 
     public $search;
-    public $ProductNew = false, $editProduct = false;
+    public $ProductNew = false, $editProduct = false, $showSquare = false;
     public $price = 1, $stock = 1;
     public $idProduct;
-    
+    protected $queryString = ['search'];
+    public $idImage;
+
 
     public $formData = [
         'name' => '',
@@ -26,7 +29,26 @@ class Products extends Component
         'category_id' => '',
         'subcategory_id' => '',
     ];
-    
+
+    public function toggleSquare($id)
+    {
+        $this->idImage = $id;
+        $this->openModal();
+    }
+
+    #[On('editar-imagen')]
+    function openModal()
+    {
+        $this->showSquare = !$this->showSquare;
+    }
+
+    public function updatingSearch()
+    {
+        // dd('');
+        $this->resetPage();
+        // $this->render();
+    }
+
     public function resetForm()
     {
         $this->formData = [
@@ -48,6 +70,7 @@ class Products extends Component
 
         $products = Product::where('name', 'like', "%$this->search%")
             ->paginate(20);
+
 
         return view('livewire.comics.admin.products', compact('products', 'marcas', 'categorys', 'subCategorys'));
     }
@@ -76,6 +99,9 @@ class Products extends Component
         $this->editProduct = !$this->editProduct;
     }
 
+
+    //CRUD
+    
     function save()
     {
         $this->validate([
@@ -179,5 +205,37 @@ class Products extends Component
 
         $products->delete();
         session()->flash('success', 'Producto Eliminado Correctamente');
+    }
+
+
+    //STOCK
+    function desincrementrar($id)
+    {
+
+        $producto = Product::find($id);
+
+        if ($producto) {
+            if ($producto->stock > 0) {
+                // Descontar una unidad del stock
+                $producto->stock -= 1;
+                // Guardar los cambios en la base de datos
+                $producto->save();
+            } else {
+                session()->flash('message', 'Stock insuficiente');
+            }
+        }
+    }
+
+    function incrementar($id)
+    {
+
+        $producto = Product::find($id);
+
+        if ($producto) {
+            // Incrementar el stock en 1
+            $producto->stock += 1;
+            // Guardar los cambios en la base de datos
+            $producto->save();
+        }
     }
 }
