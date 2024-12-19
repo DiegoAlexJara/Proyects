@@ -19,4 +19,8 @@ class AdminMainComicsController extends Controller
     {
         return view('comics.Main_views.admin.marca');
     }
+    public function categorias()
+    {
+        return view('comics.Main_views.admin.categorias');
+    }
 }

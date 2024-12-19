@@ -30,7 +30,7 @@ Route::prefix('comics')->group(function () {
             Route::get('/{categoria}', [UserMainComicsController::class, 'CategoriasProducts'])
                 ->name('comics_userCategorysProducts');
         });
-        
+
         Route::prefix('Marcas')->group(function () {
 
             Route::get('/', [UserMainComicsController::class, 'Marcas'])
@@ -56,8 +56,11 @@ Route::prefix('comics')->group(function () {
 
         Route::get('/products', [AdminMainComicsController::class, 'products'])
             ->name('comics_adminProducts');
-        
+
         Route::get('/marcas', [AdminMainComicsController::class, 'marcas'])
             ->name('comics_adminMarcas');
+
+        Route::get('/categorias', [AdminMainComicsController::class, 'categorias'])
+            ->name('comics_admincategorias');
     });
 });

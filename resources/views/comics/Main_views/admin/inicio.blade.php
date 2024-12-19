@@ -6,6 +6,6 @@
     <link rel="stylesheet" href="{{ asset('css/comics/admin/comment.css') }}">
 @endsection
 @section('content')
-    <h1>COMENTARIOS</h1>
+    <h1><strong>COMENTARIOS</strong></h1>
     <p>comentarios del sitio web</p>
 @endsection

@@ -2,17 +2,15 @@
 
 namespace App\Livewire\Comics\Admin;
 
-use App\Models\Comics\Marca;
-use Livewire\Attributes\On;
+use App\Models\Comics\Category as ComicsCategory;
 use Livewire\Component;
 
-class Marcas extends Component
+class Category extends Component
 {
-    public $search; 
-    public $idMarca;
-    public $MarcaNew = false, $editMarca = false, $showSquare = false;
-    public $idImage;
+    public $search;
+    public $CategoriaNew = false, $editCategoria = false;
     protected $queryString = ['search'];
+    public $idCategory;
 
     public $formData = [
         'name' => '',
@@ -30,33 +28,22 @@ class Marcas extends Component
         ];
     }
 
-    public function toggleSquare($id)
-    {
-        $this->idImage = $id;
-        $this->openModal();
-    }
-
-    #[On('editar-imagen')]
-    function openModal()
-    {
-        $this->showSquare = !$this->showSquare;
-    }
-
     public function render()
     {
-        $marcas = Marca::where('name', 'like', "%$this->search%")
-            ->paginate(20);
-        return view('livewire.comics.admin.marcas', compact('marcas'));
+        $categories = ComicsCategory::where('name', 'like', "%$this->search%")
+            ->paginate(40);
+        return view('livewire.comics.admin.category', compact('categories'));
     }
 
-    public function MarcaNueva()
+    public function CategoriaNueva()
     {
-        $this->MarcaNew = !$this->MarcaNew;
+        $this->CategoriaNew = !$this->CategoriaNew;
         $this->resetForm();
     }
 
     public function save()
     {
+
         $this->validate([
             'formData.name' => 'required',
             'formData.description' => 'required',
@@ -67,24 +54,24 @@ class Marcas extends Component
             'formData.color.required' => 'El color es requerido',
         ]);
 
-        Marca::create([
+        ComicsCategory::create([
             'name' => $this->formData['name'],
             'description' => $this->formData['description'],
             'color' => $this->formData['color'],
         ]);
         $this->resetForm();
-        session()->flash('success', 'Marca Guardado Correctamente');
-        $this->MarcaNueva();
+        session()->flash('success', 'Categoria Guardado Correctamente');
+        $this->CategoriaNueva();
     }
 
-    public function EditarMarca()
+    public function EditarCategoria()
     {
-        $this->editMarca = !$this->editMarca;
+        $this->editCategoria = !$this->editCategoria;
     }
 
     public function edit($id)
     {
-        $marca = Marca::where('id', $id)
+        $marca = ComicsCategory::where('id', $id)
             ->first();
 
 
@@ -94,12 +81,13 @@ class Marcas extends Component
             'color' => $marca->color,
         ];
 
-        $this->idMarca = $id;
-        $this->EditarMarca();
+        $this->idCategory = $id;
+        $this->EditarCategoria();
     }
 
     public function editar() 
     {
+
         $this->validate([
             'formData.name' => 'required',
             'formData.description' => 'required',
@@ -110,7 +98,7 @@ class Marcas extends Component
             'formData.color.required' => 'El color es requerido',
         ]);
 
-        $marca = Marca::where('id', $this->idMarca)
+        $marca = ComicsCategory::where('id', $this->idCategory)
             ->first();
         if ($marca) {
             $marca->update([
@@ -122,20 +110,21 @@ class Marcas extends Component
             // Manejo del caso en que no se encuentra el producto
             // Puede ser lanzar un error o devolver una respuesta que indique que no se encontró el producto
         }
-        $this->EditarMarca();
+        $this->EditarCategoria();
         $this->resetForm();
 
-        session()->flash('success', 'Marca Editado Correctamente');
+        session()->flash('success', 'Categoria Editado Correctamente');
 
-        $this->idMarca = '';
+        $this->idCategory = '';
     }
 
     public function delete($id)
     {
-        $marca = Marca::where('id', $id)
+        $marca = ComicsCategory::where('id', $id)
             ->first();
 
         $marca->delete();
-        session()->flash('success', 'Marca Eliminada Correctamente');
+        session()->flash('success', 'Categoria Eliminada Correctamente');
     }
+
 }

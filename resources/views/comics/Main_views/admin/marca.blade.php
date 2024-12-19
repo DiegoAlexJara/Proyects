@@ -6,6 +6,6 @@
     <link rel="stylesheet" href="{{ asset('css/comics/admin/marca-index.css') }}">
 @endsection
 @section('content')
-    <h2>MARCAS</h2>
+    <h2><strong>MARCAS</strong></h2>
     @livewire('comics.admin.marcas')
 @endsection

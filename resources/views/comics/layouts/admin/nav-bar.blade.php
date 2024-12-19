@@ -6,7 +6,7 @@
             <a href="{{ route('comics_adminMarcas') }}" class="d-grid gap-2">
                 <button class="btn btn-secondary" type="button">MARCAS</button>
             </a>
-            <a href="" class="d-grid gap-2">
+            <a href="{{ route('comics_admincategorias') }}" class="d-grid gap-2">
                 <button class="btn btn-secondary" type="button">CATEGORIAS</button>
             </a>
             <a href="" class="d-grid gap-2">
