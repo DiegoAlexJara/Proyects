@@ -1,9 +1,10 @@
 <div>
+
     <div class="d-grid gap-2">
         <input type="text" class="form-control" wire:model.live='search' placeholder="Buscar marca...">
     </div>
     <div class="d-grid gap-2" style="margin: 15px">
-        <button wire:click='MarcaNueva' class="btn btn-secondary" type="button">NUEVA MARCA</button>
+        <button wire:click='SubCategoriaNueva' class="btn btn-secondary" type="button">NUEVA SUB-CATEGORIA</button>
     </div>
     @if (session()->has('success'))
         <div class="alert alert-primary" role="alert" id="success-message">
@@ -21,13 +22,13 @@
                 <th class="cole">#</th>
                 <th class="cole">NOMBRE</th>
                 <th class="cole">DESCRIPCION</th>
-                <th class="cole" style="text-align: center">COLOR</th>
-                <th class="cole" style="text-align: center">IMAGEN</th>
+                <th class="cole" style="text-align: center">COLOR</th>  
+                <th class="cole" style="text-align: center">CATEGORIA</th>
             </tr>
         </thead>
         <tbody>
 
-            @foreach ($marcas as $registro)
+            @foreach ($subCategory as $registro)
                 <tr>
 
                     <th class="number">{{ $registro->id }}</th>
@@ -37,16 +38,9 @@
                     <th style="text-align: center">
                         <div class="color-circle" style="background-color: {{ $registro->color }};"></div>
                     </th>
-                    <th>
 
-                        <div style="text-align: center">
-                            <img src="{{ asset($registro->path) }}" alt="Image" style="width: 100px; height: auto;">
+                    <th class="texto">{{ $registro->Category->name }}</th>
 
-                            <p><button class="btn btn-success mt-3"
-                                    wire:click="toggleSquare({{ $registro->id }})">MODIFICAR</button></p>
-                        </div>
-
-                    </th>
                     <th>
 
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -80,15 +74,15 @@
         </tbody>
     </table>
 
-    @if ($MarcaNew)
+    @if ($SubCategoriaNew)
         <div class="overlay-background"></div>
         <div class="overlay-square">
             <div style="display: flex">
                 <div style="width: 90%">
-                    <h2>MARCA NUEVA</h2>
+                    <h2>SUB-CATEGORIA NUEVA</h2>
                 </div>
                 <div style="width: 10%; text-align: right">
-                    <button class="btn btn-danger" wire:click='MarcaNueva'>X</button>
+                    <button class="btn btn-danger" wire:click='SubCategoriaNueva'>X</button>
                 </div>
             </div>
             <form wire:submit.prevent='save'>
@@ -115,6 +109,20 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">CATEGORIA</label>
+                    <select class="form-select" aria-label="Default select example" name="category_id" id="category_id"
+                        wire:model='formData.category_id' value="{{ old('category_id') }}">
+                        <option selected disabled value="">Categorias</option>
+                        @foreach ($categorys as $registro)
+                            <option value="{{ $registro->id }}">{{ $registro->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('formData.category_id')
+                        <p>{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="color">Selecciona un color:</label>
                     <input type="color" name="color" id="color" class="form-control"wire:model='formData.color'
                         value="{{ old('color') }}">
@@ -124,21 +132,21 @@
                 </div>
 
                 <div class="d-grid gap-2 mb-3">
-                    <button class="btn btn-primary" type="submit">CREAR MARCA</button>
+                    <button class="btn btn-primary" type="submit">CREAR SUB-CATEGORIA</button>
                 </div>
             </form>
         </div>
     @endif
 
-    @if ($editMarca)
+    @if ($editSubCategoria)
         <div class="overlay-background"></div>
         <div class="overlay-square">
             <div style="display: flex">
                 <div style="width: 90%">
-                    <h2>EDITAR MARCA</h2>
+                    <h2>SUB-CATEGORIA NUEVA</h2>
                 </div>
                 <div style="width: 10%; text-align: right">
-                    <button class="btn btn-danger" wire:click='EditarMarca'>X</button>
+                    <button class="btn btn-danger" wire:click='EditarSubCategory'>X</button>
                 </div>
             </div>
             <form wire:submit.prevent='editar'>
@@ -156,8 +164,8 @@
                     <textarea name="description" id="description" cols="30" rows="10" class="form-control"
                         wire:model='formData.description' oninput="updateCharCount()" maxlength="255"
                         style="width: 100%; height: 80px; resize: none; border: .5px solid black" placeholder="Descripcion De La Marca">
-                    {{ old('description') }}
-                </textarea>
+                        {{ old('description') }}
+                    </textarea>
                     <p id="charCount">255 Caracteres Restantes</p>
                     @error('formData.description')
                         <p>{{ $message }}</p>
@@ -165,37 +173,32 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">CATEGORIA</label>
+                    <select class="form-select" aria-label="Default select example" name="category_id" id="category_id"
+                        wire:model='formData.category_id' value="{{ old('category_id') }}">
+                        <option selected disabled value="">Categorias</option>
+                        @foreach ($categorys as $registro)
+                            <option value="{{ $registro->id }}">{{ $registro->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('formData.category_id')
+                        <p>{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-3">
                     <label for="color">Selecciona un color:</label>
-                    <input type="color" name="color" id="color"
-                        class="form-control"wire:model='formData.color' value="{{ old('color') }}">
+                    <input type="color" name="color" id="color" class="form-control"wire:model='formData.color'
+                        value="{{ old('color') }}">
                     @error('formData.color')
                         <p>{{ $message }}</p>
                     @enderror
                 </div>
 
                 <div class="d-grid gap-2 mb-3">
-                    <button class="btn btn-primary" type="submit">EDITAR MARCA</button>
+                    <button class="btn btn-primary" type="submit">EDITAR SUB-CATEGORIA</button>
                 </div>
             </form>
-        </div>
-    @endif
-
-    @if ($showSquare)
-        <div class="overlay-background"></div>
-        <div class="overlay-square">
-            <div style="display: flex">
-                <div style="width: 90%">
-                    <h2>Editar Imagen</h2>
-                </div>
-                <div style="width: 10%; text-align: right">
-                    <button class="btn btn-danger" wire:click='toggleSquare(0)'>X</button>
-                </div>
-            </div>
-
-            @livewire('comics.admin.products.edit-image', ['IdUser' => $idImage, 'model' => \App\Models\Comics\Marca::class], key('Marca - Image -' . $idImage))
-
-
-
         </div>
     @endif
 

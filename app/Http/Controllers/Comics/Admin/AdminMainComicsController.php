@@ -23,4 +23,8 @@ class AdminMainComicsController extends Controller
     {
         return view('comics.Main_views.admin.categorias');
     }
+    public function subcategorias()
+    {
+        return view('comics.Main_views.admin.sub-categorias');
+    }
 }

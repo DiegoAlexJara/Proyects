@@ -62,5 +62,8 @@ Route::prefix('comics')->group(function () {
 
         Route::get('/categorias', [AdminMainComicsController::class, 'categorias'])
             ->name('comics_admincategorias');
+
+        Route::get('/sub-categorias', [AdminMainComicsController::class, 'subcategorias'])
+            ->name('comics_adminsubcategorias');
     });
 });
