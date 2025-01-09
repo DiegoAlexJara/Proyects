@@ -3,7 +3,9 @@
         <input type="text" class="form-control me-2 texto" wire:model.live='search' placeholder="Buscar producto..." />
     </div>
     <div class="d-grid gap-2" style="margin: 15px">
-        <button wire:click='NuevoProducto' class="btn btn-secondary" type="button">NUEVO PRODUCTO</button>
+        @can('create_products')
+            <button wire:click='NuevoProducto' class="btn btn-secondary" type="button">NUEVO PRODUCTO</button>
+        @endcan
     </div>
     @if (session()->has('success'))
         <div class="alert alert-primary" role="alert" id="success-message">
@@ -40,11 +42,13 @@
                     <th class="texto">{{ $registro->description }}</th>
                     <th>
 
+
                         <div style="text-align: center">
                             <img src="{{ asset($registro->path) }}" alt="Image" style="width: 100px; height: auto;">
-
-                            <p><button class="btn btn-success mt-3"
-                                    wire:click="toggleSquare({{ $registro->id }})">MODIFICAR</button></p>
+                            @can('edit_products')
+                                <p><button class="btn btn-success mt-3"
+                                        wire:click="toggleSquare({{ $registro->id }})">MODIFICAR</button></p>
+                            @endcan
                         </div>
                     </th>
                     <th class="texto">${{ $registro->price }}</th>
@@ -56,8 +60,10 @@
                                     {{ $registro->stock }}
                                 </strong>
                             </p>
-                            <button class="btn btn-danger" wire:click='desincrementrar({{ $registro->id }})'>-</button>
-                            <button class="btn btn-success" wire:click='incrementar({{ $registro->id }})'>+</button>
+                            @can('edit_products')
+                                <button class="btn btn-danger" wire:click='desincrementrar({{ $registro->id }})'>-</button>
+                                <button class="btn btn-success" wire:click='incrementar({{ $registro->id }})'>+</button>
+                            @endcan
                         </div>
 
 
@@ -65,31 +71,34 @@
                     <th class="texto">{{ $registro->Marca->name }}</th>
                     <th class="texto">{{ $registro->Category->name }}</th>
                     <th class="texto">{{ $registro->subcategory->name }}</th>
-                    <th>
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            ACCIONES
-                        </a>
-                        <ul class="dropdown-menu" style="color: rgba(255, 255, 255, 0); border: 0">
+                    @can('edit_products')
+                        <th>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                ACCIONES
+                            </a>
+                            <ul class="dropdown-menu" style="color: rgba(255, 255, 255, 0); border: 0">
 
-                            <li>
-                                <div class="d-grid gap-2" style="margin-bottom: 5px">
-                                    <button wire:click='edit({{ $registro->id }})'
-                                        class="btn btn-warning">MODIFICAR</button>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-grid gap-2" style="color: rgba(255, 255, 255, 0); border: 0">
-                                    <button wire:click='delete({{ $registro->id }})'
-                                        class="btn btn-danger">ELIMINAR</button>
-                                </div>
-                            </li>
+                                <li>
+                                    <div class="d-grid gap-2" style="margin-bottom: 5px">
+                                        <button wire:click='edit({{ $registro->id }})'
+                                            class="btn btn-warning">MODIFICAR</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    @can('delete_products')
+                                        <div class="d-grid gap-2" style="color: rgba(255, 255, 255, 0); border: 0">
+                                            <button wire:click='delete({{ $registro->id }})'
+                                                class="btn btn-danger">ELIMINAR</button>
+                                        </div>
+                                    @endcan
+                                </li>
 
 
 
-                        </ul>
-                    </th>
-
+                            </ul>
+                        </th>
+                    @endcan
                 </tr>
             @endforeach
         </tbody>

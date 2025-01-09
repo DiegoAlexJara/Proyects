@@ -28,17 +28,17 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">CONTACTOS</a>
+                    <a class="nav-link" href="{{ route('comics_userComment') }}">CONTACTOS</a>
                 </li>
             </ul>
 
             <div class="right-section">
 
+                @can('mode_admin')
+                    <a href="{{ route('comics_adminInicio') }}" class="admin-btn">Panel Admin</a>
+                @endcan
 
-                <a href="{{ route('comics_adminInicio') }}" class="admin-btn">Panel Admin</a>
-
-
-                <a href="" class="d-flex cart-icon">
+                <a href="{{ route('comics_userCarrito') }}" class="d-flex cart-icon">
                     🛒 Carrito <span id="cart-count"></span>
                 </a>
                 <div class="nav-item dropdown profile-btn">

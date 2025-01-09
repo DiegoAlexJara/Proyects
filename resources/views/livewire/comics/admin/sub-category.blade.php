@@ -3,9 +3,11 @@
     <div class="d-grid gap-2">
         <input type="text" class="form-control" wire:model.live='search' placeholder="Buscar marca...">
     </div>
-    <div class="d-grid gap-2" style="margin: 15px">
-        <button wire:click='SubCategoriaNueva' class="btn btn-secondary" type="button">NUEVA SUB-CATEGORIA</button>
-    </div>
+    @can('create_subcategorias')
+        <div class="d-grid gap-2" style="margin: 15px">
+            <button wire:click='SubCategoriaNueva' class="btn btn-secondary" type="button">NUEVA SUB-CATEGORIA</button>
+        </div>
+    @endcan
     @if (session()->has('success'))
         <div class="alert alert-primary" role="alert" id="success-message">
             {{ session('success') }}
@@ -22,7 +24,7 @@
                 <th class="cole">#</th>
                 <th class="cole">NOMBRE</th>
                 <th class="cole">DESCRIPCION</th>
-                <th class="cole" style="text-align: center">COLOR</th>  
+                <th class="cole" style="text-align: center">COLOR</th>
                 <th class="cole" style="text-align: center">CATEGORIA</th>
             </tr>
         </thead>
@@ -42,29 +44,32 @@
                     <th class="texto">{{ $registro->Category->name }}</th>
 
                     <th>
+                        @can('edit_subcategorias')
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                ACCIONES
+                            </a>
+                            <ul class="dropdown-menu" style="color: rgba(255, 255, 255, 0); border: 0">
 
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            ACCIONES
-                        </a>
-                        <ul class="dropdown-menu" style="color: rgba(255, 255, 255, 0); border: 0">
-
-                            <li>
-                                <div class="d-grid gap-2" style="margin-bottom: 5px">
-                                    <button wire:click='edit({{ $registro->id }})'
-                                        class="btn btn-warning">MODIFICAR</button>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-grid gap-2" style="color: rgba(255, 255, 255, 0); border: 0">
-                                    <button wire:click='delete({{ $registro->id }})'
-                                        class="btn btn-danger">ELIMINAR</button>
-                                </div>
-                            </li>
+                                <li>
+                                    <div class="d-grid gap-2" style="margin-bottom: 5px">
+                                        <button wire:click='edit({{ $registro->id }})'
+                                            class="btn btn-warning">MODIFICAR</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    @can('delete_subcategorias')
+                                        <div class="d-grid gap-2" style="color: rgba(255, 255, 255, 0); border: 0">
+                                            <button wire:click='delete({{ $registro->id }})'
+                                                class="btn btn-danger">ELIMINAR</button>
+                                        </div>
+                                    @endcan
+                                </li>
 
 
 
-                        </ul>
+                            </ul>
+                        @endcan
 
                     </th>
 
@@ -174,8 +179,8 @@
 
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">CATEGORIA</label>
-                    <select class="form-select" aria-label="Default select example" name="category_id" id="category_id"
-                        wire:model='formData.category_id' value="{{ old('category_id') }}">
+                    <select class="form-select" aria-label="Default select example" name="category_id"
+                        id="category_id" wire:model='formData.category_id' value="{{ old('category_id') }}">
                         <option selected disabled value="">Categorias</option>
                         @foreach ($categorys as $registro)
                             <option value="{{ $registro->id }}">{{ $registro->name }}</option>
@@ -188,8 +193,8 @@
 
                 <div class="mb-3">
                     <label for="color">Selecciona un color:</label>
-                    <input type="color" name="color" id="color" class="form-control"wire:model='formData.color'
-                        value="{{ old('color') }}">
+                    <input type="color" name="color" id="color"
+                        class="form-control"wire:model='formData.color' value="{{ old('color') }}">
                     @error('formData.color')
                         <p>{{ $message }}</p>
                     @enderror

@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             MarcaSeeder::class,
             SubCategorySeeder::class,
             ProductsSeeder::class,
+            PermisiosRoles::class
         ]);
         $user = User::create([
             'name' => 'visitante',
@@ -40,5 +41,18 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Diego12345'),
         ]);
         $user->Projects()->attach([1, 2, 3]);
+
+         // Encuentra el usuario
+         $user = User::find(1);
+
+         // Asigna el rol 'admin' al usuario
+         $user->assignRole('admin');
+
+         // Encuentra el usuario
+         $user = User::find(2);
+
+         // Asigna el rol 'admin' al usuario
+         $user->assignRole('user');
+        
     }
 }

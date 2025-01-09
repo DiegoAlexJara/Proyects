@@ -42,11 +42,21 @@ class UserMainComicsController extends Controller
     {
         return view('comics.Main_views.user.sub_category.view-category');
     }
-    
+
     public function SubCategoriasProducts($category)
     {
         $categorias = SubCategory::where('name', $category)->first();
         $color = $categorias->color;
         return view('comics.Main_views.user.sub_category.products-category', compact('category', 'color'));
+    }
+
+    public function comment()
+    {
+        return view('comics.Main_views.user.contactos');
+    }
+
+    public function carrito()
+    {
+        return view('comics.Main_views.user.carrito');
     }
 }

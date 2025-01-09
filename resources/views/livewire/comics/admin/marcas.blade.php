@@ -3,7 +3,9 @@
         <input type="text" class="form-control" wire:model.live='search' placeholder="Buscar marca...">
     </div>
     <div class="d-grid gap-2" style="margin: 15px">
-        <button wire:click='MarcaNueva' class="btn btn-secondary" type="button">NUEVA MARCA</button>
+        @can('create_marcas')
+            <button wire:click='MarcaNueva' class="btn btn-secondary" type="button">NUEVA MARCA</button>
+        @endcan
     </div>
     @if (session()->has('success'))
         <div class="alert alert-primary" role="alert" id="success-message">
@@ -41,36 +43,40 @@
 
                         <div style="text-align: center">
                             <img src="{{ asset($registro->path) }}" alt="Image" style="width: 100px; height: auto;">
-
-                            <p><button class="btn btn-success mt-3"
-                                    wire:click="toggleSquare({{ $registro->id }})">MODIFICAR</button></p>
+                            @can('edit_marcas')
+                                <p><button class="btn btn-success mt-3"
+                                        wire:click="toggleSquare({{ $registro->id }})">MODIFICAR</button></p>
+                            @endcan
                         </div>
 
                     </th>
                     <th>
+                        @can('edit_marcas')
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                ACCIONES
+                            </a>
+                            <ul class="dropdown-menu" style="color: rgba(255, 255, 255, 0); border: 0">
 
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            ACCIONES
-                        </a>
-                        <ul class="dropdown-menu" style="color: rgba(255, 255, 255, 0); border: 0">
-
-                            <li>
-                                <div class="d-grid gap-2" style="margin-bottom: 5px">
-                                    <button wire:click='edit({{ $registro->id }})'
-                                        class="btn btn-warning">MODIFICAR</button>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="d-grid gap-2" style="color: rgba(255, 255, 255, 0); border: 0">
-                                    <button wire:click='delete({{ $registro->id }})'
-                                        class="btn btn-danger">ELIMINAR</button>
-                                </div>
-                            </li>
+                                <li>
+                                    <div class="d-grid gap-2" style="margin-bottom: 5px">
+                                        <button wire:click='edit({{ $registro->id }})'
+                                            class="btn btn-warning">MODIFICAR</button>
+                                    </div>
+                                </li>
+                                <li>
+                                    @can('delete_marcas')
+                                        <div class="d-grid gap-2" style="color: rgba(255, 255, 255, 0); border: 0">
+                                            <button wire:click='delete({{ $registro->id }})'
+                                                class="btn btn-danger">ELIMINAR</button>
+                                        </div>
+                                    @endcan
+                                </li>
 
 
 
-                        </ul>
+                            </ul>
+                        @endcan
 
                     </th>
 
