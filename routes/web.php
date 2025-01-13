@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Repartir\MainRepartirController;
 use Illuminate\Support\Facades\Route;
 
 use function Laravel\Prompts\error;
@@ -54,6 +55,8 @@ Route::get('/', function(){
            ->header('Content-Type', 'text/html');
 
 });
+
+Route::get('/repartir', [MainRepartirController::class, 'inicio']);
 
 require __DIR__ . '/postify.php';
 require __DIR__ . '/tiendaComics.php';
