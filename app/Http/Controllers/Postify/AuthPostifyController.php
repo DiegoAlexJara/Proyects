@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Postify;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -50,5 +51,39 @@ class AuthPostifyController extends Controller
 
         // Redirige al usuario después del cierre de sesión
         return redirect()->route('postify_ShowLogin')->with('status', 'Sesión cerrada correctamente.');
+    }
+    public function CreateUser(Request $request)
+    {
+        
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => ['required', 'confirmed'],
+        ]);
+
+        $projectId  = 2;
+        $user = User::where('email', $request->email)->first();
+        if (empty($user)) {
+
+            $user = User::create($request->all());
+            $user->Projects()->attach([$projectId]);
+            $user = User::where('email', $request->email)->first();
+            Auth::login($user);
+            // Guardar proyecto en sesión
+            session(['current_project' => $projectId]);
+
+            // Redirigir a la página principal del proyecto
+            return redirect()->route('comics_userInicio');
+        }
+        if ($user->Projects->contains($projectId)) {
+            return redirect()->route('comics_userInicio');
+        }
+        $user->Projects()->attach($projectId);
+        Auth::login($user);
+        // Guardar proyecto en sesión
+        session(['current_project' => $projectId]);
+
+        // Redirigir a la página principal del proyecto
+        return redirect()->route('comics_userInicio');
     }
 }

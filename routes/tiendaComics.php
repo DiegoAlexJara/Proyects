@@ -14,6 +14,14 @@ Route::prefix('comics')->group(function () {
         ->name('comics_ShowLogin')
         ->middleware(CheckComicNoAccess::class);
 
+    Route::get('/NuevoUsuario', [AuthComicsController::class, 'NewUser'])
+        ->name('comics_NewUser')
+        ->middleware(CheckComicNoAccess::class);
+
+    Route::post('/NuevoUsuario', [AuthComicsController::class, 'CreateUser'])
+        ->name('comics_CreateUser')
+        ->middleware(CheckComicNoAccess::class);
+
     Route::post('/', [AuthComicsController::class, 'loginIn'])
         ->name('comics_LoginIn')
         ->middleware(CheckComicNoAccess::class);
@@ -91,5 +99,4 @@ Route::prefix('comics')->group(function () {
             ->name('comics_adminsubcategorias')
             ->middleware('permission:view_subcategorias');
     });
-    
 });

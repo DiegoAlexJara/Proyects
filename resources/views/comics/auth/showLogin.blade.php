@@ -58,7 +58,7 @@
             <button type="submit" class="button">INGRESAR</button>
 
             <div class="mb-3">
-                <a href="" class="link">CREAR CUENTA</a>
+                <a href="{{ route('comics_NewUser') }}" class="link">CREAR CUENTA</a>
             </div>
 
         </form>
