@@ -113,4 +113,8 @@ class PedidosEntregados extends Component
 
         $this->PagadoView();
     }
+
+    public function pedidos(){
+        return redirect()->route('repartir_Fechas');
+    }
 }

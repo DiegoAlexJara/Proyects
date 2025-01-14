@@ -10,4 +10,7 @@ class MainRepartirController extends Controller
     public function inicio(){
         return view('repartir.index');
     }
+    public function fechas(){
+        return view('repartir.pedidos-dias');
+    }
 }

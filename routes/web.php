@@ -61,3 +61,4 @@ Route::get('/repartir', [MainRepartirController::class, 'inicio']);
 require __DIR__ . '/postify.php';
 require __DIR__ . '/tiendaComics.php';
 require __DIR__ . '/finanzas.php';
+require __DIR__ . '/repartir.php';

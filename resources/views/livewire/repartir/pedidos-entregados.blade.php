@@ -37,6 +37,8 @@
             </tr>
         </tbody>
     </table>
+
+    <button wire:click='pedidos'>VER REPARTIDAS</button>
     @if ($Pedido)
         <div class="overlay-background"></div>
         <div class="overlay-square">
