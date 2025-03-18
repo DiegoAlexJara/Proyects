@@ -13,6 +13,8 @@ class MyPosts extends Component
     public $view = false;
     public $updatePost = [];
     public $userId;
+    public $updateId = 0;
+    
 
     public $formData = [
         'content' => '',
@@ -64,6 +66,7 @@ class MyPosts extends Component
         // $this->update = false;
         $this->render();
     }
+
     function delete($postId)
     {
         $post = Post::find($postId);
@@ -73,53 +76,60 @@ class MyPosts extends Component
             return;
         }
         session()->flash('message', 'Publicacion Eliminada');
+        return redirect()->route('postify_Inicio');
     }
 
     function toggleUpdate($id)
     {
-        if (!isset($this->update[$id])) {
+        if ($id == $this->updateId) {
+            $this->viewUpdate = false;
+            $this->updateId = 0;
+            return; // Evita seguir ejecutando código innecesario
+        }
+        
+        // Verificar si ya está en actualización
+        if (!isset($this->update[$id]) || !$this->update[$id]) {
             $this->update[$id] = true;
-            $this->view = false;
-
-            if (!$this->update[$id]) return;
-
+        
             $post = Post::find($id);
+        
             if (!$post) {
                 $this->formData = [
                     'content' => '',
                     'title' => ''
                 ];
-                return;
+            } else {
+                $this->formData = [
+                    'content' => $post->content,
+                    'title' => $post->title
+                ];
             }
-
-            $this->formData = [
-                'content' => $post->content, // Asigna el contenido inicial
-                'title' => $post->title
-            ];
+        
+            $this->updateId = $id;
+            $this->viewUpdate = true;
             return;
         }
-
-        if ($this->update[$id]) return;
-
+        
+        // Alternar la actualización
         $this->update[$id] = !$this->update[$id];
-        $this->view = false;
-
-        if (!$this->update[$id]) return;
-
-        $post = Post::find($id);
-
-        if (!$post) {
-            $this->formData = [
-                'content' => '',
-                'title' => ''
-            ];
+        
+        // Si ya no está en actualización, salir
+        if (!$this->update[$id]) {
             return;
         }
-
-        $this->formData = [
-            'content' => $post->content, // Asigna el contenido inicial
+        
+        // Cargar datos solo si el post existe
+        $post = Post::find($id);
+        
+        $this->formData = $post ? [
+            'content' => $post->content,
             'title' => $post->title
+        ] : [
+            'content' => '',
+            'title' => ''
         ];
+        
+        $this->updateId = $id;
     }
 
     function ActualizarPost($id)
@@ -149,4 +159,5 @@ class MyPosts extends Component
         $this->view = false;
         $this->render();
     }
+
 }

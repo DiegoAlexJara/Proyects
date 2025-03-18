@@ -14,7 +14,7 @@ class Finanza extends Component
     public $amountMonthOut = 0;
     public $amountMonthIn = 0;
     public $showSquare = false;
-    public $type = '', $categorie='', $method_payment='', $CreateTransferencia;
+    public $type = '', $categorie = '', $method_payment = '', $CreateTransferencia;
     public $amount;
     public $description, $mensajeExito;
     public $mes;
@@ -37,18 +37,16 @@ class Finanza extends Component
     public function cargarGastos()
     {
         $user = Auth::id();
-        $gastos = Transaccion::whereMonth('created_at', $this->mes)
-            ->where('amount', '<', 0)
+        $transacciones = Transaccion::selectRaw("
+        SUM(CASE WHEN amount < 0 THEN amount ELSE 0 END) as gastos,
+        SUM(CASE WHEN amount > 0 THEN amount ELSE 0 END) as ingresos
+    ")
+            ->whereMonth('created_at', $this->mes)
             ->where('user_id', $user)
-            ->sum('amount');
-        if (empty($gastos)) {
-            return;
-        }
-        $this->amountMonthOut = -$gastos;
-        $this->amountMonthIn = Transaccion::whereMonth('created_at', $this->mes)
-            ->where('amount', '>', 0)
-            ->where('user_id', $user)
-            ->sum('amount');
+            ->first();
+
+        $this->amountMonthOut = abs($transacciones->gastos ?? 0);
+        $this->amountMonthIn = $transacciones->ingresos ?? 0;
     }
 
     public function render()
@@ -97,7 +95,7 @@ class Finanza extends Component
         }
         $transfer->user_id = $user;
         $transfer->save();
-        $user_amounts = Balance::find($user);
+        $user_amounts = Balance::where('user_id', $user)->first();
         if (empty($user_amounts)) {
             $balance = new Balance();
             if ($this->type == 'Ingreso') {
@@ -108,9 +106,9 @@ class Finanza extends Component
             $balance->user_id = $user;
             $balance->save();
             $this->transaction();
-            session()->flash('mensajeExito', '¡Transacción guardada con éxito!');
+            session()->flash('mensajeExito', '¡Transacción guardada con éxito! Y Creada El Balance');
             // Redirigir para que el mensaje flash se muestre
-            return redirect()->route('finanza_inicio'); // Usa la ruta adecuada
+            return redirect()->route('finanza_Inicio'); // Usa la ruta adecuada
         }
         $balance = Balance::where('user_id', $user)->first();
         if ($this->type == 'Ingreso') {
@@ -126,8 +124,9 @@ class Finanza extends Component
         return redirect()->route('finanza_Inicio'); // Usa la ruta adecuada
 
     }
-    
-    public function Reports(){
+
+    public function Reports()
+    {
         return redirect()->route('finanza_Report');
     }
 }

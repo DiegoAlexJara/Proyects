@@ -12,6 +12,8 @@ class Comments extends Component
     public $comments;
     public $view = false;
     public $commentsUpdate = [];
+    public $updateId;
+    public $viewUpdate = false;
 
     public $formData = [
         'content' => ''
@@ -62,41 +64,41 @@ class Comments extends Component
 
     function editar($commentId)
     {   
-        $this->view = false;
-        if (!isset($this->commentsUpdate[$commentId])) {
-
+        
+        if ($commentId == $this->updateId) {
+            $this->viewUpdate = false;
+            $this->updateId = 0;
+            return; // Evita seguir ejecutando código innecesario
+        }
+        
+        if (!isset($this->commentsUpdate[$commentId]) || !$this->commentsUpdate[$commentId]) {
             $this->commentsUpdate[$commentId] = true;
-
-            if (!$this->commentsUpdate[$commentId]) return;
-
             $comment = Comment::find($commentId);
-
+        
             if (!$comment) {
-                $this->formData = [
-                    'content' => '',
-                ];
+                $this->formData = ['content' => ''];
                 return;
             }
-            $this->formData = [
-                'content' => $comment->content,
-            ];
+        
+            $this->formData = ['content' => $comment->content];
+            $this->updateId = $commentId;
+            $this->viewUpdate = true;
             return;
         }
+        
         $this->commentsUpdate[$commentId] = !$this->commentsUpdate[$commentId];
-
+        
         if (!$this->commentsUpdate[$commentId]) return;
-
+        
         $comment = Comment::find($commentId);
-
+        
         if (!$comment) {
-            $this->formData = [
-                'content' => '',
-            ];
+            $this->formData = ['content' => ''];
             return;
         }
-        $this->formData = [
-            'content' => $comment->content,
-        ];
+        $this->formData = ['content' => $comment->content];
+        $this->updateId = $commentId;
+
     }
 
     function viewComment()

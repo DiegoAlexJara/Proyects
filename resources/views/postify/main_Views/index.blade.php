@@ -9,5 +9,4 @@
     @livewire('postify.my-posts')
 @endsection
 @section('js')
-    <script src="{{ asset('js/create-post.js') }}"></script>
 @endsection

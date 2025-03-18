@@ -20,7 +20,7 @@
                     <button wire:click="delete({{ $item->id }})" class="btn btn-danger">Eliminar</button>
                 @endif
             </div>
-            @if (isset($commentsUpdate[$item->id]) && $commentsUpdate[$item->id])
+            @if (isset($commentsUpdate[$item->id]) && $commentsUpdate[$item->id] && $this->viewUpdate && $item->id == $updateId)
                 <form class="comment-form" wire:submit.prevent='modificar({{ $item->id }})'>
                     <textarea name="comment" class="comment-input" wire:model='formData.content' placeholder="Escribe tu comentario..."></textarea>
                     <button type="submit" class="comment-submit">Modificar Comentario</button>
